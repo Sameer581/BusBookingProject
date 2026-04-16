@@ -3,6 +3,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,7 +19,10 @@ public class BusBooking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "booking_dt")
     private LocalDate bookingDate;
+    
+    @Column(name = "booking_status")
     private String bookingStatus;
 
     @ManyToOne
