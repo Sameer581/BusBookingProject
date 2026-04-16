@@ -7,6 +7,6 @@ import com.cg.entity.Customer;
 
 
 @Repository
-public interface BusBookingRepo extends JpaRepository<Customer, Integer> {
+public interface BusBookingRepo extends JpaRepository<Customer, Long> {
 
 }

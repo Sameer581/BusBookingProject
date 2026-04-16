@@ -1,5 +1,12 @@
 package com.cg.repo;
 
-public interface PassengerRepo {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.cg.entity.Customer;
+
+
+@Repository
+public interface PassengerRepo extends JpaRepository<Customer, Long> {
 
 }

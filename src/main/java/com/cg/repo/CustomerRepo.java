@@ -7,6 +7,6 @@ import com.cg.entity.Customer;
 
 
 @Repository
-public interface CustomerRepo extends JpaRepository<Customer, Integer> {
+public interface CustomerRepo extends JpaRepository<Customer, Long> {
 
 }
