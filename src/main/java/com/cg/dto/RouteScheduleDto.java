@@ -3,7 +3,11 @@ package com.cg.dto;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public record RouteScheduleDto(LocalTime departureTime, LocalDate scheduleDate, int totalSeats, int availableSeats,
+public record RouteScheduleDto(
+		LocalTime departureTime, 
+		LocalDate scheduleDate, 
+		int totalSeats, 
+		int availableSeats,
 		Long routeId) {
 
 }
