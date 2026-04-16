@@ -7,9 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import com.cg.entity.BusBooking;
 
-
 @Repository
 public interface BusBookingRepo extends JpaRepository<BusBooking, Long> {
-	public List<BusBooking> findByCustomerId(Long customerId);
+
+    List<BusBooking> findByCustomerCustomerId(Long customerId);
 
 }
