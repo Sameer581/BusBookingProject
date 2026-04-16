@@ -1,5 +1,14 @@
 package com.cg.service;
 
-public interface BusBookingService {
+import java.util.List;
 
+import com.cg.dto.BusBookingDto;
+import com.cg.dto.RouteScheduleDto;
+import com.cg.entity.BusBooking;
+import com.cg.entity.RouteSchedule;
+
+public interface BusBookingService {
+	public RouteSchedule createSchedule(RouteScheduleDto dto);
+	public BusBooking createBooking(BusBookingDto dto);
+	public List<BusBookingDto> getBookingsByCustomer(Long custId);
 }
