@@ -72,11 +72,4 @@ public class BusBookingServiceImple implements BusBookingService {
 
 		return bookings;
 	}
-
-	@Override
-	public List<BusBookingDto> getAllBookings() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

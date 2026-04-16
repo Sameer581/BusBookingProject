@@ -26,6 +26,10 @@ public class Passenger {
 
 	@Column(name = "seat_no")
 	private int seatNo;
+	
+	@ManyToOne
+	@JoinColumn(name = "schedule_id")
+	private RouteSchedule schedule;
 
 	@ManyToOne
 	@JoinColumn(name = "booking_id")
