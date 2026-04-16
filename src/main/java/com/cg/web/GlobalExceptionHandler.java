@@ -1,4 +1,4 @@
-package com.cg.exception;
+package com.cg.web;
 
 public class GlobalExceptionHandler {
 

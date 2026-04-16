@@ -1,5 +1,5 @@
 package com.cg.service;
 
-public class BusBookingServiceImple {
+public class BusBookingServiceImple implements BusBookingService{
 
 }
