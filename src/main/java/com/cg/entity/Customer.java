@@ -1,12 +1,16 @@
 package com.cg.entity;
 
+import java.util.List;
+
 import org.hibernate.annotations.DynamicUpdate;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -23,6 +27,9 @@ public class Customer {
 
 	@Column(name = "cust_phone_no")
 	private Integer customerPhoneNumber;
+	
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+	private List<BusBooking> bookings;
 
 	public Customer() {
 	}
@@ -56,6 +63,14 @@ public class Customer {
 
 	public void setCustomerPhoneNumber(Integer customerPhoneNumber) {
 		this.customerPhoneNumber = customerPhoneNumber;
+	}
+
+	public List<BusBooking> getBookings() {
+		return bookings;
+	}
+
+	public void setBookings(List<BusBooking> bookings) {
+		this.bookings = bookings;
 	}
 
 }
