@@ -1,4 +1,6 @@
 package com.cg.entity;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,29 +11,26 @@ import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
 @Entity
-@Table(
-    uniqueConstraints = @UniqueConstraint(columnNames = {"seat_no", "schedule_id"})
-)
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = { "seat_no", "schedule_id" }))
 public class Passenger {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "passender_id")
+	private Long id;
 
-    private String passengerName;
-    private int passengerAge;
-    private int seatNo;
+	@Column(name = "passenger_name")
+	private String passengerName;
 
-    @ManyToOne
-    @JoinColumn(name = "booking_id")
-    private BusBooking booking;
+	@Column(name = "passenger_age")
+	private int passengerAge;
 
-    // 🔥 Important for seat uniqueness per schedule
-    @ManyToOne
-    @JoinColumn(name = "schedule_id")
-    private RouteSchedule schedule;
+	@Column(name = "seat_no")
+	private int seatNo;
 
-    // getters & setters
-    
-    
+	@ManyToOne
+	@JoinColumn(name = "booking_id")
+	private BusBooking booking;
+
+	// getters & setters
 }
