@@ -1,8 +1,12 @@
 package com.cg.entity;
 
+import java.util.Set;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,5 +22,7 @@ public class BusRoute {
 	@Column(name = "dest")
 	private String dest;
 	
+	@OneToMany(mappedBy = "route", cascade = CascadeType.ALL)
+	private Set<RouteSchedule> routeSchedules;
 	
 }
