@@ -1,28 +1,30 @@
 package com.cg.web;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import com.cg.dto.BusBookingDto;
 import com.cg.entity.BusBooking;
 import com.cg.service.BusBookingService;
 
 @RestController
 @RequestMapping("/booking")
 public class BusBookingController {
-	
-	@Autowired
-	private BusBookingService busBookingService;
-	
-	@PostMapping("/book")
-	@ResponseStatus(HttpStatus.CREATED)
-	public 
-	
-	@GetMapping("/viewall")
-	public BusBooking get
 
+    @Autowired
+    private BusBookingService bookingService;
+
+    @PostMapping("/book")
+    @ResponseStatus(HttpStatus.CREATED)
+    public BusBooking bookTicket(@RequestBody BusBookingDto booking) {
+        return bookingService.createBooking(booking);
+    }
+
+    @GetMapping("/customer/{id}")
+    public List<BusBookingDto> getBookingsByCustomer(@PathVariable Long id) {
+        return bookingService.getBookingsByCustomer(id);
+    }
 }
