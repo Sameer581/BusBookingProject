@@ -31,6 +31,62 @@ public class Passenger {
 	@ManyToOne
 	@JoinColumn(name = "booking_id")
 	private BusBooking booking;
-
+	
 	// getters & setters
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getPassengerName() {
+		return passengerName;
+	}
+
+	public void setPassengerName(String passengerName) {
+		this.passengerName = passengerName;
+	}
+
+	public int getPassengerAge() {
+		return passengerAge;
+	}
+
+	public void setPassengerAge(int passengerAge) {
+		this.passengerAge = passengerAge;
+	}
+
+	public int getSeatNo() {
+		return seatNo;
+	}
+
+	public void setSeatNo(int seatNo) {
+		this.seatNo = seatNo;
+	}
+
+	public BusBooking getBooking() {
+		return booking;
+	}
+
+	public void setBooking(BusBooking booking) {
+		this.booking = booking;
+	}
+
+	public Passenger(Long id, String passengerName, int passengerAge, int seatNo, BusBooking booking) {
+		super();
+		this.id = id;
+		this.passengerName = passengerName;
+		this.passengerAge = passengerAge;
+		this.seatNo = seatNo;
+		this.booking = booking;
+	}
+	
+	public Passenger() {
+		
+	}
+
+	
+	
 }
