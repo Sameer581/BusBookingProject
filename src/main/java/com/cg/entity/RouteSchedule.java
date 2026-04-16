@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,24 +17,108 @@ import jakarta.persistence.OneToMany;
 @Entity
 public class RouteSchedule {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    private LocalTime departureTime;
-    private LocalDate scheduleDate;
+	@Column(name = "departure_time")
+	private LocalTime departureTime;
 
-    private int totalSeats;
-    private int availableSeats;
+	@Column(name = "schedule_date")
+	private LocalDate scheduleDate;
 
-    private String scheduleStatus;
+	@Column(name = "total_seats")
+	private int totalSeats;
 
-    @ManyToOne
-    @JoinColumn(name = "route_id")
-    private BusRoute route;
+	@Column(name = "available_seats")
+	private int availableSeats;
 
-    @OneToMany(mappedBy = "schedule", cascade = CascadeType.ALL)
-    private List<BusBooking> bookings;
+	@Column(name = "schedule_status")
+	private String scheduleStatus;
 
-    // getters & setters
+	@ManyToOne
+	@JoinColumn(name = "route_id")
+	private BusRoute route;
+
+	@OneToMany(mappedBy = "schedule", cascade = CascadeType.ALL)
+	private List<BusBooking> bookings;
+
+	public RouteSchedule() {
+	}
+
+	public RouteSchedule(Long id, LocalTime departureTime, LocalDate scheduleDate, int totalSeats, int availableSeats,
+			String scheduleStatus, BusRoute route) {
+		super();
+		this.id = id;
+		this.departureTime = departureTime;
+		this.scheduleDate = scheduleDate;
+		this.totalSeats = totalSeats;
+		this.availableSeats = availableSeats;
+		this.scheduleStatus = scheduleStatus;
+		this.route = route;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public LocalTime getDepartureTime() {
+		return departureTime;
+	}
+
+	public void setDepartureTime(LocalTime departureTime) {
+		this.departureTime = departureTime;
+	}
+
+	public LocalDate getScheduleDate() {
+		return scheduleDate;
+	}
+
+	public void setScheduleDate(LocalDate scheduleDate) {
+		this.scheduleDate = scheduleDate;
+	}
+
+	public int getTotalSeats() {
+		return totalSeats;
+	}
+
+	public void setTotalSeats(int totalSeats) {
+		this.totalSeats = totalSeats;
+	}
+
+	public int getAvailableSeats() {
+		return availableSeats;
+	}
+
+	public void setAvailableSeats(int availableSeats) {
+		this.availableSeats = availableSeats;
+	}
+
+	public String getScheduleStatus() {
+		return scheduleStatus;
+	}
+
+	public void setScheduleStatus(String scheduleStatus) {
+		this.scheduleStatus = scheduleStatus;
+	}
+
+	public BusRoute getRoute() {
+		return route;
+	}
+
+	public void setRoute(BusRoute route) {
+		this.route = route;
+	}
+
+	public List<BusBooking> getBookings() {
+		return bookings;
+	}
+
+	public void setBookings(List<BusBooking> bookings) {
+		this.bookings = bookings;
+	}
 }

@@ -13,7 +13,6 @@ import jakarta.persistence.UniqueConstraint;
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = { "seat_no", "schedule_id" }))
 public class Passenger {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "passender_id")
@@ -31,7 +30,7 @@ public class Passenger {
 	@ManyToOne
 	@JoinColumn(name = "booking_id")
 	private BusBooking booking;
-	
+
 	// getters & setters
 
 	public Long getId() {
@@ -82,11 +81,9 @@ public class Passenger {
 		this.seatNo = seatNo;
 		this.booking = booking;
 	}
-	
+
 	public Passenger() {
-		
+
 	}
 
-	
-	
 }

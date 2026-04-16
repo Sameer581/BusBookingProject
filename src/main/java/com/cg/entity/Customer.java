@@ -8,26 +8,37 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+
 @Entity
 @DynamicUpdate
-@Table(name="customer")
+@Table(name = "customer")
 public class Customer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="cust_id")
-	private Integer customerId;
-	
-	@Column(name="cust_name")
+	@Column(name = "cust_id")
+	private Long customerId;
+
+	@Column(name = "cust_name")
 	private String customerName;
-	
-	@Column(name="cust_phone_no")
+
+	@Column(name = "cust_phone_no")
 	private Integer customerPhoneNumber;
 
-	public Integer getCustomerId() {
+	public Customer() {
+	}
+
+	public Customer(Long customerId, String customerName, Integer customerPhoneNumber) {
+		super();
+		this.customerId = customerId;
+		this.customerName = customerName;
+		this.customerPhoneNumber = customerPhoneNumber;
+	}
+
+	public Long getCustomerId() {
 		return customerId;
 	}
 
-	public void setCustomerId(Integer customerId) {
+	public void setCustomerId(Long customerId) {
 		this.customerId = customerId;
 	}
 
@@ -46,6 +57,5 @@ public class Customer {
 	public void setCustomerPhoneNumber(Integer customerPhoneNumber) {
 		this.customerPhoneNumber = customerPhoneNumber;
 	}
-	
-	
+
 }
