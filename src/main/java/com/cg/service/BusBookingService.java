@@ -16,4 +16,5 @@ public interface BusBookingService {
 	public List<BusBookingDto> getAllBookings();
 
 	public List<BusBookingDto> getBookingsByCustomer(Long custId);
+
 }
