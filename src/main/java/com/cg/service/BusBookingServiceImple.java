@@ -51,7 +51,6 @@ public class BusBookingServiceImple implements BusBookingService {
 
 	@Override
 	public BusBooking createBooking(BusBookingDto dto) {
-
 		BusBooking booking = new BusBooking();
 		Customer cust = custRepo.findById(dto.custId())
 				.orElseThrow(() -> new NotAvailableException("customer not found with id " + dto.custId()));
@@ -67,7 +66,6 @@ public class BusBookingServiceImple implements BusBookingService {
 
 	@Override
 	public List<BusBookingDto> getBookingsByCustomer(Long custId) {
-
 		Customer cust = custRepo.findById(custId)
 				.orElseThrow(() -> new NotAvailableException("customer not found with id " + custId));
 
