@@ -3,6 +3,8 @@ package com.cg.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Service;
 
 import com.cg.dto.BookingToDto;
 import com.cg.dto.BusBookingDto;
@@ -17,6 +19,7 @@ import com.cg.repo.BusRouteRepo;
 import com.cg.repo.CustomerRepo;
 import com.cg.repo.RouteScheduleRepo;
 
+@Service
 public class BusBookingServiceImple implements BusBookingService {
 
 	@Autowired
@@ -45,7 +48,6 @@ public class BusBookingServiceImple implements BusBookingService {
 		schedule.setScheduleStatus("SCHEDULED");
 
 		return scheduleRepo.save(schedule);
-
 	}
 
 	@Override
@@ -60,6 +62,7 @@ public class BusBookingServiceImple implements BusBookingService {
 		booking.setCustomer(cust);
 		booking.setSchedule(schedule);
 		booking.setBookingStatus("BOOKED");
+
 		return bookingRepo.save(booking);
 	}
 
@@ -68,8 +71,15 @@ public class BusBookingServiceImple implements BusBookingService {
 		Customer cust = custRepo.findById(custId)
 				.orElseThrow(() -> new NotAvailableException("customer not found with id " + custId));
 
-		List<BusBookingDto> bookings = cust.getBookings().stream().map(BookingToDto::mapToDto).toList();
+		List<BusBookingDto> bookings =
+				cust.getBookings().stream().map(BookingToDto::mapToDto).toList();
 
 		return bookings;
+	}
+
+	@Override
+	public List<BusBookingDto> getAllBookings() {
+	
+		return null;
 	}
 }
