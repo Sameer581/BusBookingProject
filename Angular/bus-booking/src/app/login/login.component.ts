@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BookingService } from '../booking.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -13,37 +12,37 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  frm: FormGroup;
+  loginData = {
+    username: '',
+    password: '',
+  };
 
+  errorMessage: string = '';
   res: boolean = false;
 
   constructor(
-    private fb: FormBuilder,
     private auth: BookingService,
     private router: Router,
-  ) {
-    this.frm = this.fb.group({
-      uname: ['', Validators.required],
-      pwd: ['', Validators.required],
-    });
-  }
+  ) {}
 
   doLogin() {
-    console.log(this.frm.value);
-    let uname = this.frm.value.uname;
-    let pwd = this.frm.value.pwd;
-    console.log(uname, pwd);
-    this.auth.doLogin({ username: uname, password: pwd }).subscribe({
+    console.log(this.loginData);
+
+    this.auth.doLogin(this.loginData).subscribe({
       next: (response: any) => {
         this.res = true;
+
         let token = response.token;
-        console.log('Login successful, token:', response, token);
+        console.log('Login successful:', response);
+
         this.auth.token = token;
         this.auth.username = response.username;
+
         this.router.navigate(['/schedule']);
       },
       error: (error) => {
         console.error('Login failed:', error);
+        this.errorMessage = 'Invalid username or password';
         this.res = false;
       },
     });
