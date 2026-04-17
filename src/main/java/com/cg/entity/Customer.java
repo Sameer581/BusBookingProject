@@ -22,10 +22,10 @@ public class Customer {
 	@Column(name = "cust_id")
 	private Long customerId;
 
-	@Column(name = "cust_name")
+	@Column(name = "cust_name",  unique = true, nullable = false, length = 100)
 	private String customerName;
 
-	@Column(name = "cust_phone_no")
+	@Column(name = "cust_phone_no", nullable = false)
 	private String customerPhoneNumber;
 	
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
