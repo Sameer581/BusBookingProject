@@ -42,7 +42,7 @@ public class SecurityConfig {
 				.authorizeHttpRequests(auth -> auth
 						.requestMatchers("/swagger-ui/**", "/swagger-resources/*", "/v3/api-docs/**").permitAll())
 				.authorizeHttpRequests(auth -> auth.requestMatchers("/booking/**").authenticated())
-				.authorizeHttpRequests(auth -> auth.requestMatchers("/schedule/**").permitAll())
+				.authorizeHttpRequests(auth -> auth.requestMatchers("/schedule/**").authenticated())
 //                .authorizeHttpRequests(auth -> auth.requestMatchers("/addcart","/editcart").hasRole("USER"))
 //                .authorizeHttpRequests(auth -> auth.requestMatchers("/addproduct").hasRole("ADMIN"))
 				.sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
