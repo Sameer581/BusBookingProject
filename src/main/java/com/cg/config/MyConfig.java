@@ -37,13 +37,6 @@ public class MyConfig {
 	}
 	
     @Bean
-    public UserDetailsService userDetailsService() {
-    	JdbcDaoImpl obj = new JdbcDaoImpl();
-        obj.setJdbcTemplate(new JdbcTemplate(dataSource));
-    	return obj;
-    }
-	
-    @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration builder) throws Exception {
         return builder.getAuthenticationManager();
     }
