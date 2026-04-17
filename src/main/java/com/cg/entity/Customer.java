@@ -26,7 +26,7 @@ public class Customer {
 	private String customerName;
 
 	@Column(name = "cust_phone_no")
-	private Integer customerPhoneNumber;
+	private String customerPhoneNumber;
 	
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
 	private List<BusBooking> bookings;
@@ -34,7 +34,7 @@ public class Customer {
 	public Customer() {
 	}
 
-	public Customer(Long customerId, String customerName, Integer customerPhoneNumber) {
+	public Customer(Long customerId, String customerName, String customerPhoneNumber) {
 		super();
 		this.customerId = customerId;
 		this.customerName = customerName;
@@ -57,11 +57,11 @@ public class Customer {
 		this.customerName = customerName;
 	}
 
-	public Integer getCustomerPhoneNumber() {
+	public String getCustomerPhoneNumber() {
 		return customerPhoneNumber;
 	}
 
-	public void setCustomerPhoneNumber(Integer customerPhoneNumber) {
+	public void setCustomerPhoneNumber(String customerPhoneNumber) {
 		this.customerPhoneNumber = customerPhoneNumber;
 	}
 
