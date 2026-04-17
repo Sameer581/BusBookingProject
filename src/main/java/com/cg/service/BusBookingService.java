@@ -4,8 +4,6 @@ import java.util.List;
 
 import com.cg.dto.BusBookingDto;
 import com.cg.dto.RouteScheduleDto;
-import com.cg.entity.BusBooking;
-import com.cg.entity.RouteSchedule;
 
 public interface BusBookingService {
 	public RouteScheduleDto createSchedule(RouteScheduleDto dto);

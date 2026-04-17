@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cg.dto.LoginResponseDto;
 import com.cg.security.AuthRequest;
 import com.cg.security.JWTService;
-import com.cg.security.JwtService;
 
 @RestController
 public class LoginController {
@@ -41,7 +40,7 @@ public class LoginController {
 			LoginResponseDto dto = new LoginResponseDto();
 			dto.setToken(token);
 			dto.setMsg("user authenticated");
-			dto.setUsername(authRequest.getUsername());
+			dto.setUserName(authRequest.getUsername());
 			dto.setTimestamp(LocalDateTime.now().toString());
 
 			return dto;
