@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 import com.cg.dto.BookingToDto;
 import com.cg.dto.BusBookingDto;
 import com.cg.dto.RouteScheduleDto;
+import com.cg.dto.ScheduleToDto;
 import com.cg.entity.BusBooking;
 import com.cg.entity.BusRoute;
 import com.cg.entity.Customer;
+import com.cg.entity.Passenger;
 import com.cg.entity.RouteSchedule;
 import com.cg.exception.NotAvailableException;
 import com.cg.repo.BusBookingRepo;
@@ -35,10 +37,10 @@ public class BusBookingServiceImple implements BusBookingService {
 	private BusBookingRepo bookingRepo;
 
 	@Override
-	public RouteSchedule createSchedule(RouteScheduleDto dto) {
+	public RouteScheduleDto createSchedule(RouteScheduleDto dto) {
 		RouteSchedule schedule = new RouteSchedule();
-		BusRoute route = routeRepo.findById(dto.routeId())
-				.orElseThrow(() -> new NotAvailableException("bus route not found with id " + dto.routeId()));
+		BusRoute route = routeRepo.findById(dto.route().routeId())
+				.orElseThrow(() -> new NotAvailableException("bus route not found with id " + dto.route().routeId()));
 
 		schedule.setAvailableSeats(dto.availableSeats());
 		schedule.setDepartureTime(dto.departureTime());
@@ -47,11 +49,11 @@ public class BusBookingServiceImple implements BusBookingService {
 		schedule.setTotalSeats(dto.totalSeats());
 		schedule.setScheduleStatus("SCHEDULED");
 
-		return scheduleRepo.save(schedule);
+		return ScheduleToDto.mapToDto(scheduleRepo.save(schedule));
 	}
 
 	@Override
-	public BusBooking createBooking(BusBookingDto dto) {
+	public BusBookingDto createBooking(BusBookingDto dto) {
 		BusBooking booking = new BusBooking();
 		Customer cust = custRepo.findById(dto.custId())
 				.orElseThrow(() -> new NotAvailableException("customer not found with id " + dto.custId()));
@@ -63,7 +65,20 @@ public class BusBookingServiceImple implements BusBookingService {
 		booking.setSchedule(schedule);
 		booking.setBookingStatus("BOOKED");
 
-		return bookingRepo.save(booking);
+		List<Passenger> passengers = dto.passengers() != null ? dto.passengers().stream().map(p -> {
+			Passenger passenger = new Passenger();
+			passenger.setPassengerAge(p.passengerAge());
+			passenger.setPassengerName(p.passengerName());
+			passenger.setSeatNo(p.seatNo());
+			passenger.setBooking(booking);
+
+			return passenger;
+
+		}).toList() : List.of();
+
+		booking.setPassengers(passengers);
+
+		return BookingToDto.mapToDto(bookingRepo.save(booking));
 	}
 
 	@Override
@@ -71,15 +86,23 @@ public class BusBookingServiceImple implements BusBookingService {
 		Customer cust = custRepo.findById(custId)
 				.orElseThrow(() -> new NotAvailableException("customer not found with id " + custId));
 
-		List<BusBookingDto> bookings =
-				cust.getBookings().stream().map(BookingToDto::mapToDto).toList();
+		List<BusBookingDto> bookings = cust.getBookings().stream().map(BookingToDto::mapToDto).toList();
 
 		return bookings;
 	}
 
 	@Override
 	public List<BusBookingDto> getAllBookings() {
-	
+
 		return null;
+	}
+
+	@Override
+	public List<RouteScheduleDto> getSchedules() {
+		List<RouteSchedule> schedules = scheduleRepo.findAll();
+
+		List<RouteScheduleDto> scheduleDtos = schedules.stream().map(ScheduleToDto::mapToDto).toList();
+
+		return scheduleDtos;
 	}
 }
