@@ -28,6 +28,12 @@ public class JWTAuthFilter extends OncePerRequestFilter {
 	private JWTService jwtService;
 
 	@Override
+	protected boolean shouldNotFilter(HttpServletRequest request) {
+		String path = request.getServletPath();
+		return path.equals("/generateToken") || path.startsWith("/swagger") || path.startsWith("/v3/api-docs");
+	}
+
+	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		String authHeader = request.getHeader("Authorization");
