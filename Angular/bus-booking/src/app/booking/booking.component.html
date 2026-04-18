@@ -1,1 +1,51 @@
-<p>booking works!</p>
+<div class="container mt-4 text-center">
+
+  <h3>Bus Seat Booking</h3>
+
+  <!-- ACTION BUTTONS -->
+  <div class="mb-3">
+    <button class="btn btn-success me-2" (click)="bookSeats()">
+      Book Seats
+    </button>
+    <button class="btn btn-danger" (click)="clearSeats()">
+      Clear
+    </button>
+  </div>
+
+  <!-- SEAT GRID -->
+  <div
+    style="display: grid; justify-content: center;"
+    [style.gridTemplateColumns]="'repeat(' + cols + ', 60px)'"
+    [style.gap]="'10px'"
+  >
+
+    <ng-container *ngFor="let row of seats; let rowIndex = index">
+      
+      <ng-container *ngFor="let seat of row; let colIndex = index">
+
+        <div
+          class="seat"
+          [ngClass]="{
+            'selected': seat.isSelected,
+            'disabled': seat.isBooked,
+            'aisle': colIndex === 1
+          }"
+          (click)="toggleSeat(seat)"
+        >
+          {{ seat.seatNumber }}
+        </div>
+
+      </ng-container>
+
+    </ng-container>
+
+  </div>
+
+  <!-- RESET BUTTON -->
+  <div class="mt-3">
+    <button class="btn btn-warning" (click)="resetBooking()">
+      Reset Bookings
+    </button>
+  </div>
+
+</div>
