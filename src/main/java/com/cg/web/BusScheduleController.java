@@ -1,5 +1,6 @@
 package com.cg.web;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.dto.RouteScheduleDto;
@@ -31,5 +33,11 @@ public class BusScheduleController {
 	@GetMapping("viewall")
 	public ResponseEntity<List<RouteScheduleDto>> getSchedules() {
 		return new ResponseEntity<>(busService.getSchedules(), HttpStatus.OK);
+	}
+
+	@GetMapping("view")
+	public ResponseEntity<List<RouteScheduleDto>> getSchedulesBySrcAndDestAndDate(@RequestParam String src,
+			@RequestParam String dest, @RequestParam LocalDate scheduleDate) {
+		return new ResponseEntity<>(busService.getSchedulesBySrcDestDate(src, dest, scheduleDate), HttpStatus.OK);
 	}
 }

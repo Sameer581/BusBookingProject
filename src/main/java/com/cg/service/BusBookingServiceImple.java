@@ -1,5 +1,6 @@
 package com.cg.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,6 +100,16 @@ public class BusBookingServiceImple implements BusBookingService {
 	@Override
 	public List<RouteScheduleDto> getSchedules() {
 		List<RouteSchedule> schedules = scheduleRepo.findAll();
+
+		List<RouteScheduleDto> scheduleDtos = schedules.stream().map(ScheduleToDto::mapToDto).toList();
+
+		return scheduleDtos;
+	}
+
+	@Override
+	public List<RouteScheduleDto> getSchedulesBySrcDestDate(String src, String dest, LocalDate scheduleDate) {
+		List<RouteSchedule> schedules = scheduleRepo
+				.findByRoute_SrcIgnoreCaseAndRoute_DestIgnoreCaseAndScheduleDate(src, dest, scheduleDate);
 
 		List<RouteScheduleDto> scheduleDtos = schedules.stream().map(ScheduleToDto::mapToDto).toList();
 
