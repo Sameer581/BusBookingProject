@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BookingService } from '../booking.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-schedule',
@@ -12,15 +13,26 @@ import { FormsModule } from '@angular/forms';
 })
 export class ScheduleComponent {
   schedules: any[] = [];
+  source: string = '';
+  dest: string = '';
+  date: string = '';
 
-  constructor(private service: BookingService) {}
+  constructor(
+    private service: BookingService,
+    private route: ActivatedRoute,
+  ) {}
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe((params) => {
+      this.source = params['source'] || '';
+      this.dest = params['destination'] || '';
+      this.date = params['date'] || '';
+    });
     this.loadSchedules();
   }
 
   loadSchedules() {
-    this.service.getSchedules().subscribe({
+    this.service.getSchedules(this.source, this.dest, this.date).subscribe({
       next: (res: any) => {
         this.schedules = res;
         console.log('Schedules:', res);
@@ -37,6 +49,5 @@ export class ScheduleComponent {
 
   bookSeats(schedule: any) {
     console.log('Selected schedule:', schedule);
-  
   }
 }

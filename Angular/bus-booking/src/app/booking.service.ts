@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -14,7 +14,14 @@ export class BookingService {
     return this.http.post('http://localhost:8080/generateToken', credentials);
   }
 
-  getSchedules(): Observable<any> {
-    return this.http.get('http://localhost:8080/schedule/viewall');
+  getSchedules(src: string, dest: string, date: string): Observable<any> {
+    let params = new HttpParams()
+      .set('src', src)
+      .set('dest', dest)
+      .set('scheduleDate', date);
+
+    return this.http.get('http://localhost:8080/schedule/view', {
+      params: params,
+    });
   }
 }
