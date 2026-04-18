@@ -38,7 +38,7 @@ export class LoginComponent {
         this.auth.token = token;
         this.auth.username = response.username;
 
-        this.router.navigate(['/schedule']);
+        this.router.navigate(['/search']);
       },
       error: (error) => {
         console.error('Login failed:', error);

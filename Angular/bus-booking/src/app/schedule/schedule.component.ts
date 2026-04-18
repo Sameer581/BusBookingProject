@@ -37,6 +37,6 @@ export class ScheduleComponent {
 
   bookSeats(schedule: any) {
     console.log('Selected schedule:', schedule);
-    // navigate or handle booking
+  
   }
 }
