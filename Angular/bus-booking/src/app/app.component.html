@@ -1,14 +1,40 @@
-<nav class="navbar">
-  <h2>Bus Booking System</h2>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm px-4">
 
-  <div class="nav-links">
-    <a routerLink="/login" routerLinkActive="active">Login</a>
-    <a routerLink="/schedule" routerLinkActive="active">Schedule</a>
+  <a class="navbar-brand fw-bold" href="#">
+    Bus Booking
+  </a>
+
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarNav">
+
+    <ul class="navbar-nav ms-auto">
+
+      <li class="nav-item" *ngIf="!bookingService.token">
+        <a class="nav-link" routerLink="/login" routerLinkActive="active">
+          Login
+        </a>
+      </li>
+
+      <li class="nav-item" *ngIf="bookingService.token">
+        <a class="nav-link btn btn-link" (click)="logout()" routerLinkActive="active">
+          Logout
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/schedule" routerLinkActive="active">
+          Schedule
+        </a>
+      </li>
+
+    </ul>
+
   </div>
 </nav>
 
-<hr />
-
-<div class="container">
+<div class="container mt-4">
   <router-outlet></router-outlet>
 </div>

@@ -1,1 +1,56 @@
-<p>schedule works!</p>
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="fw-bold">📅 Available Schedules</h3>
+    </div>
+
+    <div class="card shadow-sm p-3">
+
+        <div class="table-responsive">
+
+            <table class="table table-striped table-hover align-middle">
+
+                <thead class="table-dark text-center">
+                    <tr>
+                        <th>Departure</th>
+                        <th>Source</th>
+                        <th>Destination</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <!-- Data -->
+                    <tr *ngFor="let s of schedules" class="text-center">
+
+                        <td>
+                            {{ formatTime(s.scheduleDate, s.departureTime) | date:'hh:mm a' }}
+                        </td>
+
+                        <td>{{ s.route.src | titlecase }}</td>
+                        <td>{{ s.route.dest | titlecase }}</td>
+
+                        <td>
+                            <span class="badge bg-success" *ngIf="s.availableSeats > 0">
+                                {{ s.availableSeats }}/{{s.totalSeats}} Available
+                            </span>
+                            <span class="badge bg-danger" *ngIf="s.availableSeats === 0">
+                                Full
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr *ngIf="schedules.length === 0">
+                        <td colspan="8" class="text-center text-muted">
+                            No schedules available
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+</div>

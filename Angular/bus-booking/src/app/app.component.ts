@@ -1,13 +1,26 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { BookingService } from './booking.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, RouterLink, CommonModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
+  constructor(
+    public bookingService: BookingService,
+    public router: Router,
+  ) {}
+
   title = 'WorldBus';
+
+  logout() {
+    this.bookingService.token = undefined;
+    this.bookingService.username = undefined;
+    this.router.navigate(['/login']);
+  }
 }
