@@ -21,6 +21,7 @@ import com.cg.exception.ValidationException;
 import com.cg.service.BusBookingService;
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/schedule")
@@ -32,7 +33,7 @@ public class BusScheduleController {
 	private BusBookingService busService;
 
 	@PostMapping("/create")
-	public ResponseEntity<RouteScheduleDto> createSchedule(@RequestBody RouteScheduleDto schedule, BindingResult br) {
+	public ResponseEntity<RouteScheduleDto> createSchedule(@Valid @RequestBody RouteScheduleDto schedule, BindingResult br) {
 		
 		if (br.hasErrors()) {
 			throw new ValidationException(br.getFieldErrors());
