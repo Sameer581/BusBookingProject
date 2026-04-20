@@ -9,33 +9,16 @@
       <thead class="table-dark">
         <tr>
           <th>Booking ID</th>
-          <th>Bus Name</th>
-          <th>Source</th>
-          <th>Destination</th>
+          <th>Bus Schedule ID</th>
           <th>Date</th>
-          <th>Seats</th>
         </tr>
       </thead>
 
       <tbody>
         <tr *ngFor="let b of bookings">
           <td>{{ b.bookingId }}</td>
-          <td>{{ b.busName }}</td>
-          <td>{{ b.source }}</td>
-          <td>{{ b.destination }}</td>
-          <td>{{ b.travelDate }}</td>
-          <td>
-            <!-- Handles both array and string -->
-            <span *ngIf="b.seats instanceof Array; else seatString">
-              <span class="badge bg-primary me-1" *ngFor="let s of b.seats">
-                {{ s }}
-              </span>
-            </span>
-
-            <ng-template #seatString>
-              {{ b.seats }}
-            </ng-template>
-          </td>
+          <td>{{ b.scheduleId }}</td>
+          <td>{{ b.bookingDt | date: 'dd-MMM-yyyy' }}</td>
         </tr>
       </tbody>
     </table>

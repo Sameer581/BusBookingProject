@@ -3,7 +3,7 @@ import { inject } from '@angular/core';
 import { BookingService } from './booking.service';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  if (req.url.includes('/generateToken')) {
+  if (req.url.includes('/generateToken') || req.url.includes('/signup')) {
     return next(req);
   }
   const bookingService = inject(BookingService);
