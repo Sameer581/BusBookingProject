@@ -15,6 +15,10 @@ export class BookingService {
     return this.http.post('http://localhost:8080/generateToken', credentials);
   }
 
+  doSignup(credentials: any): Observable<any> {
+    return this.http.post('http://localhost:8080/signup', credentials);
+  }
+
   getSchedules(src: string, dest: string, date: string): Observable<any> {
     let params = new HttpParams()
       .set('src', src)
