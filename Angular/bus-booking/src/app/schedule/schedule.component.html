@@ -13,9 +13,11 @@
                 <thead class="table-dark text-center">
                     <tr>
                         <th>Departure</th>
+                        <th>Date</th>
                         <th>Source</th>
                         <th>Destination</th>
                         <th>Status</th>
+                        <th>Book</th>
                     </tr>
                 </thead>
 
@@ -26,6 +28,9 @@
 
                         <td>
                             {{ formatTime(s.scheduleDate, s.departureTime) | date:'hh:mm a' }}
+                        </td>
+                        <td>
+                            {{s.scheduleDate | date: 'dd-MMMM-yyyy'}}
                         </td>
 
                         <td>{{ s.route.src | titlecase }}</td>
@@ -38,6 +43,12 @@
                             <span class="badge bg-danger" *ngIf="s.availableSeats === 0">
                                 Full
                             </span>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary" [disabled]="s.availableSeats === 0"
+                                (click)="goToBooking(s)">
+                                Book
+                            </button>
                         </td>
                     </tr>
 

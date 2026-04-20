@@ -1,77 +1,114 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BookingService } from '../booking.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-moviebooking',
+  selector: 'app-booking',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './booking.component.html',
-  styleUrl: './booking.component.css'
+  styleUrl: './booking.component.css',
 })
-export class MoviebookingComponent {
+export class BookingComponent implements OnInit {
+  schedule: any = {};
+  rows: number = 5;
+  cols: number = 4;
 
-  rows = 10;
-  cols = 4;
+  seats: any[][] = [];
 
-  bookedSeats: string[] = [];
-  selectedSeats: string[] = [];
+  passengers: any[] = [];
 
-  seats: string[][] = [];
+  constructor(
+    public service: BookingService,
+    public route: ActivatedRoute,
+    public router: Router,
+  ) {}
 
-  ngOnInit() {
-    this.generateSeats();
+  ngOnInit(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+
+    this.service.getScheduleById(id).subscribe({
+      next: (res) => {
+        this.schedule = res;
+        this.initializeSeats();
+      },
+      error: (err) => console.error(err),
+    });
   }
 
-  // ✅ Generate 10x4 bus layout (A1, A2, A3, A4...)
-  generateSeats() {
+  initializeSeats() {
     this.seats = [];
+    this.cols = 4;
+    this.rows = Math.ceil(this.schedule.totalSeats / this.cols);
 
-    for (let row = 0; row < this.rows; row++) {
-      let rowSeats: string[] = [];
+    const letters = ['A', 'B', 'C', 'D'];
 
-      for (let col = 0; col < this.cols; col++) {
-        const seatLabel = `${String.fromCharCode(65 + row)}${col + 1}`;
-        rowSeats.push(seatLabel);
+    for (let i = 0; i < this.rows; i++) {
+      let row = [];
+
+      for (let j = 0; j < this.cols; j++) {
+        const seatNo = letters[j] + (i + 1);
+
+        row.push({
+          seatNumber: seatNo,
+          isSelected: false,
+          isBooked: this.schedule.bookedSeats?.includes(seatNo),
+        });
       }
 
-      this.seats.push(rowSeats);
-    }
-
-    console.log('Seats:', this.seats);
-  }
-
-  // ✅ Select / Deselect seat
-  selectSeat(seat: string) {
-    if (this.bookedSeats.includes(seat)) return;
-
-    if (this.selectedSeats.includes(seat)) {
-      this.selectedSeats = this.selectedSeats.filter(s => s !== seat);
-    } else {
-      this.selectedSeats.push(seat);
+      this.seats.push(row);
     }
   }
 
-  // ✅ Book selected seats
+  formatTime(date: string, time: string): Date {
+    return new Date(date + 'T' + time);
+  }
+
   bookSeats() {
-    if (this.selectedSeats.length === 0) {
-      alert('Please select at least one seat to book.');
+    if (this.passengers.length === 0) {
+      alert('Select seats first');
       return;
     }
 
-    this.bookedSeats.push(...this.selectedSeats);
-    this.selectedSeats = [];
+    const payload = {
+      scheduleId: this.schedule.scheduleId,
+      custId: this.service.custId,
+      bookingDt: new Date().toISOString().split('T')[0],
+      passengers: this.passengers,
+    };
 
-    console.log('Booked:', this.bookedSeats);
+    console.log('Booking payload:', payload);
+
+    this.service.bookSeats(payload).subscribe({
+      next: () => {
+        alert('Booking successful');
+        this.router.navigate(['/']);
+      },
+      error: (err) => console.error(err),
+    });
   }
 
-  // ✅ Clear selection only
-  clearSeats() {
-    this.selectedSeats = [];
+  clearSeats() {}
+
+  toggleSeat(seat: any) {
+    if (seat.isBooked) return;
+
+    seat.isSelected = !seat.isSelected;
+
+    if (seat.isSelected) {
+      this.passengers.push({
+        seatNo: seat.seatNumber,
+        passengerName: '',
+        passengerAge: null,
+      });
+    } else {
+      this.passengers = this.passengers.filter(
+        (p) => p.seatNo !== seat.seatNumber,
+      );
+    }
   }
 
-  // ✅ Reset everything
-  resetBooking() {
-    this.selectedSeats = [];
-    this.bookedSeats = [];
-  }
+  resetBooking() {}
 }

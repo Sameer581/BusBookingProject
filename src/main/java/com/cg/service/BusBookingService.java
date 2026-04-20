@@ -19,4 +19,5 @@ public interface BusBookingService {
 
 	public List<RouteScheduleDto> getSchedulesBySrcDestDate(String src, String dest, LocalDate scheduleDate);
 
+	public RouteScheduleDto getScheduleById(Long id);
 }

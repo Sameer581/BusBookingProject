@@ -37,6 +37,7 @@ export class LoginComponent {
 
         this.auth.token = token;
         this.auth.username = response.username;
+        this.auth.custId = response.custId;
 
         this.router.navigate(['/search']);
       },

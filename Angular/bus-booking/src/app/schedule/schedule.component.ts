@@ -20,6 +20,7 @@ export class ScheduleComponent {
   constructor(
     private service: BookingService,
     private route: ActivatedRoute,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -47,7 +48,9 @@ export class ScheduleComponent {
     return new Date(date + 'T' + time);
   }
 
-  bookSeats(schedule: any) {
-    console.log('Selected schedule:', schedule);
+  goToBooking(schedule: any) {
+    console.log('Selected:', schedule);
+
+    this.router.navigate(['/booking', schedule.scheduleId]);
   }
 }

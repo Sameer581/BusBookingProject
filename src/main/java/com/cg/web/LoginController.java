@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.dto.LoginResponseDto;
+import com.cg.entity.Customer;
+import com.cg.repo.CustomerRepo;
 import com.cg.security.AuthRequest;
 import com.cg.security.JWTService;
 
@@ -25,6 +27,9 @@ public class LoginController {
 
 	@Autowired
 	private JWTService jwtService;
+
+	@Autowired
+	private CustomerRepo custRepo;
 
 	@PostMapping("/generateToken")
 	public LoginResponseDto authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
@@ -42,6 +47,10 @@ public class LoginController {
 			dto.setMsg("user authenticated");
 			dto.setUserName(authRequest.getUsername());
 			dto.setTimestamp(LocalDateTime.now().toString());
+			Customer cust = custRepo.findByUserUsername(authRequest.getUsername())
+					.orElseThrow(() -> new RuntimeException("Customer not found"));
+
+			dto.setCustId(cust.getCustomerId());
 
 			return dto;
 		} else {

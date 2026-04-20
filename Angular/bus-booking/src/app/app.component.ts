@@ -19,8 +19,10 @@ export class AppComponent {
   title = 'WorldBus';
 
   logout() {
-    this.bookingService.token = undefined;
-    this.bookingService.username = undefined;
-    this.router.navigate(['/login']);
+    if (confirm('Are You Sure You Want To Log Out?')) {
+      this.bookingService.token = undefined;
+      this.bookingService.username = undefined;
+      this.router.navigate(['/login']);
+    }
   }
 }

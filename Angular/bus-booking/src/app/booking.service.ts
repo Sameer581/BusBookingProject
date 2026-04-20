@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 export class BookingService {
   token?: string;
   username?: string;
+  custId?: number;
   constructor(public http: HttpClient) {}
 
   doLogin(credentials: any): Observable<any> {
@@ -23,5 +24,13 @@ export class BookingService {
     return this.http.get('http://localhost:8080/schedule/view', {
       params: params,
     });
+  }
+
+  getScheduleById(id: number): Observable<any> {
+    return this.http.get('http://localhost:8080/schedule/view/' + id);
+  }
+
+  bookSeats(payload: any): Observable<any> {
+    return this.http.post('http://localhost:8080/booking/book', payload);
   }
 }

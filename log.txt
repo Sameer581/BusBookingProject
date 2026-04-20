@@ -1,0 +1,89 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------< com.cg:BusBookingProject >----------------------
+[INFO] Building BusBookingProject 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:4.0.5:run (default-cli) > test-compile @ BusBookingProject >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ BusBookingProject ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ BusBookingProject ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ BusBookingProject ---
+[INFO] skip non existing resourceDirectory /Users/zaid/eclipse-workspace/SpringPractice/BusBookingProject/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ BusBookingProject ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] <<< spring-boot:4.0.5:run (default-cli) < test-compile @ BusBookingProject <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:4.0.5:run (default-cli) @ BusBookingProject ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.0.5)
+
+2026-04-18T21:10:20.972+05:30  INFO 80507 --- [BusTicketBookingManagement] [           main] com.cg.BusBookingProjectApplication      : Starting BusBookingProjectApplication using Java 17.0.17 with PID 80507 (/Users/zaid/eclipse-workspace/SpringPractice/BusBookingProject/target/classes started by zaid in /Users/zaid/eclipse-workspace/SpringPractice/BusBookingProject)
+2026-04-18T21:10:20.973+05:30  INFO 80507 --- [BusTicketBookingManagement] [           main] com.cg.BusBookingProjectApplication      : No active profile set, falling back to 1 default profile: "default"
+2026-04-18T21:10:21.229+05:30  INFO 80507 --- [BusTicketBookingManagement] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-18T21:10:21.246+05:30  INFO 80507 --- [BusTicketBookingManagement] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 14 ms. Found 7 JPA repository interfaces.
+2026-04-18T21:10:21.403+05:30  INFO 80507 --- [BusTicketBookingManagement] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-04-18T21:10:21.407+05:30  INFO 80507 --- [BusTicketBookingManagement] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-18T21:10:21.407+05:30  INFO 80507 --- [BusTicketBookingManagement] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-04-18T21:10:21.428+05:30  INFO 80507 --- [BusTicketBookingManagement] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 436 ms
+2026-04-18T21:10:21.466+05:30  INFO 80507 --- [BusTicketBookingManagement] [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-18T21:10:21.481+05:30  INFO 80507 --- [BusTicketBookingManagement] [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-04-18T21:10:21.599+05:30  INFO 80507 --- [BusTicketBookingManagement] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-18T21:10:21.609+05:30  INFO 80507 --- [BusTicketBookingManagement] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-04-18T21:10:21.672+05:30  INFO 80507 --- [BusTicketBookingManagement] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@39e7e040
+2026-04-18T21:10:21.672+05:30  INFO 80507 --- [BusTicketBookingManagement] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-04-18T21:10:21.682+05:30  WARN 80507 --- [BusTicketBookingManagement] [           main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-18T21:10:21.689+05:30  INFO 80507 --- [BusTicketBookingManagement] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/busbookingmgmt]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 18.2
+	Default catalog/schema: busbookingmgmt/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-18T21:10:21.788+05:30  WARN 80507 --- [BusTicketBookingManagement] [           main] org.hibernate.orm.core                   : HHH000038: Composite id class does not override equals(): com.cg.entity.RolePk
+2026-04-18T21:10:22.002+05:30  INFO 80507 --- [BusTicketBookingManagement] [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: alter table if exists passenger drop constraint if exists UK80oimxmurgkhbph948ex1vh28
+2026-04-18T21:10:22.045+05:30  WARN 80507 --- [BusTicketBookingManagement] [           main] org.hibernate.orm.jdbc.warn              : HHH000247: ErrorCode: 0, SQLState: 00000
+2026-04-18T21:10:22.045+05:30  WARN 80507 --- [BusTicketBookingManagement] [           main] org.hibernate.orm.jdbc.warn              : constraint "uk80oimxmurgkhbph948ex1vh28" of relation "passenger" does not exist, skipping
+Hibernate: alter table if exists passenger add constraint UK80oimxmurgkhbph948ex1vh28 unique (seat_no, schedule_id)
+2026-04-18T21:10:22.060+05:30  INFO 80507 --- [BusTicketBookingManagement] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-18T21:10:22.079+05:30  INFO 80507 --- [BusTicketBookingManagement] [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-18T21:10:22.309+05:30  INFO 80507 --- [BusTicketBookingManagement] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImple
+2026-04-18T21:10:22.346+05:30  WARN 80507 --- [BusTicketBookingManagement] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-18T21:10:22.517+05:30  INFO 80507 --- [BusTicketBookingManagement] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-04-18T21:10:22.520+05:30  INFO 80507 --- [BusTicketBookingManagement] [           main] com.cg.BusBookingProjectApplication      : Started BusBookingProjectApplication in 1.657 seconds (process running for 1.776)
+2026-04-18T21:10:22.520+05:30  WARN 80507 --- [BusTicketBookingManagement] [           main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-04-18T21:10:22.520+05:30  WARN 80507 --- [BusTicketBookingManagement] [           main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swaggerui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-04-18T21:10:40.293+05:30  INFO 80507 --- [BusTicketBookingManagement] [ionShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-18T21:10:40.303+05:30  INFO 80507 --- [BusTicketBookingManagement] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-04-18T21:10:40.309+05:30  INFO 80507 --- [BusTicketBookingManagement] [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-18T21:10:40.311+05:30  INFO 80507 --- [BusTicketBookingManagement] [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-04-18T21:10:40.316+05:30  INFO 80507 --- [BusTicketBookingManagement] [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  20.164 s
+[INFO] Finished at: 2026-04-18T21:10:40+05:30
+[INFO] ------------------------------------------------------------------------

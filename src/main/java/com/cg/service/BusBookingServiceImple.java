@@ -49,6 +49,8 @@ public class BusBookingServiceImple implements BusBookingService {
 		schedule.setTotalSeats(dto.totalSeats());
 		schedule.setScheduleStatus("SCHEDULED");
 
+		scheduleRepo.save(schedule);
+
 		return ScheduleToDto.mapToDto(scheduleRepo.save(schedule));
 	}
 
@@ -69,7 +71,8 @@ public class BusBookingServiceImple implements BusBookingService {
 			Passenger passenger = new Passenger();
 			passenger.setPassengerAge(p.passengerAge());
 			passenger.setPassengerName(p.passengerName());
-			passenger.setSeatNo(p.seatNo());
+			passenger.setSeatNo(p.seatNo().toUpperCase());
+			schedule.getBookedSeats().add(p.seatNo());
 			passenger.setBooking(booking);
 
 			return passenger;
@@ -77,6 +80,10 @@ public class BusBookingServiceImple implements BusBookingService {
 		}).toList() : List.of();
 
 		booking.setPassengers(passengers);
+		schedule.setAvailableSeats(schedule.getAvailableSeats()-passengers.size());
+
+		bookingRepo.save(booking);
+		scheduleRepo.save(schedule);
 
 		return BookingToDto.mapToDto(bookingRepo.save(booking));
 	}
@@ -114,5 +121,15 @@ public class BusBookingServiceImple implements BusBookingService {
 		List<RouteScheduleDto> scheduleDtos = schedules.stream().map(ScheduleToDto::mapToDto).toList();
 
 		return scheduleDtos;
+	}
+
+	@Override
+	public RouteScheduleDto getScheduleById(Long id) {
+		RouteSchedule schedule = scheduleRepo.findById(id)
+				.orElseThrow(() -> new NotAvailableException("Schedule not found with id "));
+
+		RouteScheduleDto scheduleDto = ScheduleToDto.mapToDto(schedule);
+
+		return scheduleDto;
 	}
 }

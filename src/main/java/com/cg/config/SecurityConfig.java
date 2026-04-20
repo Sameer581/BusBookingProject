@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
@@ -36,15 +37,11 @@ public class SecurityConfig {
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		return http.cors(cors -> cors.configurationSource(corsConfigurationSource())).csrf(csrf -> csrf.disable())
-				.authorizeHttpRequests(auth -> auth.requestMatchers("/generateToken").permitAll())
-//        		
-				.authorizeHttpRequests(auth -> auth.requestMatchers("/swagger-ui.html").permitAll())
-				.authorizeHttpRequests(auth -> auth
-						.requestMatchers("/swagger-ui/**", "/swagger-resources/*", "/v3/api-docs/**").permitAll())
-				.authorizeHttpRequests(auth -> auth.requestMatchers("/booking/**").authenticated())
-				.authorizeHttpRequests(auth -> auth.requestMatchers("/schedule/**").authenticated())
-//                .authorizeHttpRequests(auth -> auth.requestMatchers("/addcart","/editcart").hasRole("USER"))
-//                .authorizeHttpRequests(auth -> auth.requestMatchers("/addproduct").hasRole("ADMIN"))
+				.authorizeHttpRequests(auth -> auth.requestMatchers("/generateToken").permitAll()
+						.requestMatchers("/signup").permitAll()
+						.requestMatchers("/swagger-ui/**", "/swagger-resources/*", "/v3/api-docs/**").permitAll()
+						.requestMatchers("/booking/**").authenticated().requestMatchers("/schedule/**").authenticated()
+						.anyRequest().authenticated())
 				.sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class).build();
 	}

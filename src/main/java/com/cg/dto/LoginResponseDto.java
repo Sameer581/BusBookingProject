@@ -6,6 +6,7 @@ public class LoginResponseDto {
 	private String msg;
 	private String timestamp;
 	private String userName;
+	private Long custId;
 
 	public String getUserName() {
 		return userName;
@@ -37,6 +38,14 @@ public class LoginResponseDto {
 
 	public void setTimestamp(String timestamp) {
 		this.timestamp = timestamp;
+	}
+
+	public Long getCustId() {
+		return custId;
+	}
+
+	public void setCustId(Long custId) {
+		this.custId = custId;
 	}
 	
 	

@@ -30,7 +30,8 @@ public class JWTAuthFilter extends OncePerRequestFilter {
 	@Override
 	protected boolean shouldNotFilter(HttpServletRequest request) {
 		String path = request.getServletPath();
-		return path.equals("/generateToken") || path.startsWith("/swagger") || path.startsWith("/v3/api-docs");
+		return path.equals("/generateToken") || path.startsWith("/signup") || path.startsWith("/swagger")
+				|| path.startsWith("/v3/api-docs");
 	}
 
 	@Override

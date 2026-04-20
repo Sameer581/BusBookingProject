@@ -1,5 +1,5 @@
 package com.cg.dto;
 
-public record PassengerDto(String passengerName, int passengerAge, int seatNo, Long bookingId) {
+public record PassengerDto(Long passengerId, String passengerName, int passengerAge, String seatNo, Long bookingId) {
 
 }

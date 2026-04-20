@@ -25,7 +25,7 @@ public class Passenger {
 	private int passengerAge;
 
 	@Column(name = "seat_no")
-	private int seatNo;
+	private String seatNo;
 
 	@ManyToOne
 	@JoinColumn(name = "booking_id")
@@ -57,11 +57,11 @@ public class Passenger {
 		this.passengerAge = passengerAge;
 	}
 
-	public int getSeatNo() {
+	public String getSeatNo() {
 		return seatNo;
 	}
 
-	public void setSeatNo(int seatNo) {
+	public void setSeatNo(String seatNo) {
 		this.seatNo = seatNo;
 	}
 
@@ -73,7 +73,7 @@ public class Passenger {
 		this.booking = booking;
 	}
 
-	public Passenger(Long id, String passengerName, int passengerAge, int seatNo, BusBooking booking) {
+	public Passenger(Long id, String passengerName, int passengerAge, String seatNo, BusBooking booking) {
 		super();
 		this.id = id;
 		this.passengerName = passengerName;

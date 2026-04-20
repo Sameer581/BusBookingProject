@@ -2,10 +2,13 @@ package com.cg.entity;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -35,6 +38,14 @@ public class RouteSchedule {
 
 	@Column(name = "schedule_status")
 	private String scheduleStatus;
+	
+	@ElementCollection
+	@CollectionTable(
+	    name = "schedule_booked_seats",
+	    joinColumns = @JoinColumn(name = "schedule_id")
+	)
+	@Column(name = "seat_no")
+	private List<String> bookedSeats = new ArrayList<>();
 
 	@ManyToOne
 	@JoinColumn(name = "route_id")
@@ -121,4 +132,12 @@ public class RouteSchedule {
 	public void setBookings(List<BusBooking> bookings) {
 		this.bookings = bookings;
 	}
-}
+	
+	public List<String> getBookedSeats() {
+		return this.bookedSeats;
+	}
+	
+	public void setBookedSeats(List<String> bookedSeats) {
+		this.bookedSeats = bookedSeats;
+	}
+} 

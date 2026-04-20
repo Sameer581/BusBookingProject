@@ -4,13 +4,17 @@ import java.util.List;
 
 import org.hibernate.annotations.DynamicUpdate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,7 +26,7 @@ public class Customer {
 	@Column(name = "cust_id")
 	private Long customerId;
 
-	@Column(name = "cust_name",  unique = true, nullable = false, length = 100)
+	@Column(name = "cust_name", nullable = false, length = 100)
 	private String customerName;
 
 	@Column(name = "cust_phone_no", nullable = false)
@@ -31,6 +35,11 @@ public class Customer {
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
 	private List<BusBooking> bookings;
 
+	@OneToOne
+	@JoinColumn(name = "id")
+	@JsonIgnore
+	private User user;
+	
 	public Customer() {
 	}
 
@@ -71,6 +80,14 @@ public class Customer {
 
 	public void setBookings(List<BusBooking> bookings) {
 		this.bookings = bookings;
+	}
+	
+	public User getUser() {
+		return this.user;
+	}
+	
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }
