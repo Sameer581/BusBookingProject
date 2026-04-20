@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.dto.RouteScheduleDto;
+import com.cg.exception.ValidationException;
 import com.cg.service.BusBookingService;
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -30,7 +32,12 @@ public class BusScheduleController {
 	private BusBookingService busService;
 
 	@PostMapping("/create")
-	public ResponseEntity<RouteScheduleDto> createSchedule(@RequestBody RouteScheduleDto schedule) {
+	public ResponseEntity<RouteScheduleDto> createSchedule(@RequestBody RouteScheduleDto schedule, BindingResult br) {
+		
+		if (br.hasErrors()) {
+			throw new ValidationException(br.getFieldErrors());
+		}
+		
 		return new ResponseEntity<>(busService.createSchedule(schedule), HttpStatus.CREATED);
 	}
 
