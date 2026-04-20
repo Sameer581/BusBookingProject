@@ -1,0 +1,95 @@
+/* Container spacing */
+.container {
+  max-width: 800px;
+  margin: auto;
+}
+
+/* Heading */
+h3 {
+  font-weight: 600;
+  letter-spacing: 0.4px;
+}
+
+/* Table styling */
+.table {
+  border-radius: 10px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+/* Header */
+.table thead {
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+/* Table rows */
+.table tbody tr {
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+/* Hover effect */
+.table tbody tr:hover {
+  background-color: #f5f7ff;
+  transform: scale(1.01);
+}
+
+/* Cells */
+.table td,
+.table th {
+  vertical-align: middle;
+  padding: 12px;
+  font-size: 14px;
+}
+
+/* Zebra override (softer than default bootstrap) */
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #fafbff;
+}
+
+/* Booking ID emphasis */
+.table td:first-child {
+  font-weight: 600;
+  color: #333;
+}
+
+/* Alert styling */
+.alert {
+  border-radius: 8px;
+  font-size: 14px;
+  padding: 10px;
+}
+
+/* Empty state styling */
+.alert-info {
+  background-color: #eef4ff;
+  border-color: #cfe0ff;
+  color: #3a5ccc;
+}
+
+/* Smooth appearance */
+.table,
+.alert {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive tweak */
+@media (max-width: 600px) {
+  .table th,
+  .table td {
+    font-size: 12px;
+    padding: 8px;
+  }
+}

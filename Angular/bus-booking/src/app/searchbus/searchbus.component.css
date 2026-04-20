@@ -1,0 +1,94 @@
+/* Container */
+.container {
+  max-width: 420px;
+  margin: auto;
+}
+
+/* Heading */
+h3 {
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* Form card feel (optional but recommended) */
+form {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Inputs */
+.form-control {
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+/* Focus state */
+.form-control:focus {
+  border-color: #4c6ef5;
+  box-shadow: 0 0 0 2px rgba(76, 110, 245, 0.15);
+}
+
+/* Invalid input highlight (Angular adds ng-invalid) */
+.ng-invalid.ng-touched {
+  border-color: #dc3545;
+  background-color: #fff5f5;
+}
+
+/* Error messages */
+.text-danger {
+  font-size: 12px;
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* Button */
+.btn-primary {
+  width: 100%;
+  border-radius: 10px;
+  padding: 10px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+/* Button hover */
+.btn-primary:hover:not(:disabled) {
+  transform: scale(1.02);
+}
+
+/* Disabled button */
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Smooth spacing between fields */
+input + div {
+  margin-bottom: 6px;
+}
+
+/* Animation */
+form {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .container {
+    padding: 10px;
+  }
+}

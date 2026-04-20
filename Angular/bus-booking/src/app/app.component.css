@@ -1,0 +1,83 @@
+/* Navbar base */
+.navbar {
+  background: linear-gradient(90deg, #1f1f1f, #2c2c2c);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Brand */
+.navbar-brand {
+  font-size: 20px;
+  letter-spacing: 0.5px;
+  color: #ffffff !important;
+}
+
+/* Nav links */
+.nav-link {
+  color: #d1d1d1 !important;
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 10px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+/* Hover effect */
+.nav-link:hover {
+  color: #ffffff !important;
+}
+
+/* Active link underline animation */
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: #4c6ef5;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+/* Button-like nav links */
+.nav-link.btn-link {
+  text-decoration: none;
+}
+
+/* Logout highlight */
+.nav-link:last-child {
+  color: #ff6b6b !important;
+}
+
+/* Logout hover */
+.nav-link:last-child:hover {
+  color: #ff4d4d !important;
+}
+
+/* Toggler */
+.navbar-toggler {
+  border: none;
+}
+
+/* Smooth dropdown animation */
+.navbar-collapse {
+  transition: all 0.3s ease;
+}
+
+/* Container spacing */
+.container {
+  max-width: 1100px;
+  margin: auto;
+}
+
+/* Mobile adjustments */
+@media (max-width: 991px) {
+  .nav-link {
+    margin: 8px 0;
+  }
+
+  .navbar-collapse {
+    background: #1f1f1f;
+    padding: 10px;
+    border-radius: 10px;
+  }
+}

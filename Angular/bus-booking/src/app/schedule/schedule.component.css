@@ -1,0 +1,123 @@
+/* Container */
+.container {
+  max-width: 1000px;
+  margin: auto;
+}
+
+/* Heading */
+h3 {
+  letter-spacing: 0.5px;
+}
+
+/* Card */
+.card {
+  border: none;
+  border-radius: 14px;
+  background: #ffffff;
+}
+
+/* Table */
+.table {
+  margin-bottom: 0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Header */
+.table thead th {
+  font-size: 13px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+/* Rows */
+.table tbody tr {
+  transition: all 0.2s ease;
+}
+
+/* Hover effect */
+.table-hover tbody tr:hover {
+  background-color: #f4f7ff;
+  transform: scale(1.01);
+}
+
+/* Cells */
+.table td {
+  font-size: 14px;
+  padding: 12px;
+}
+
+/* Badge styling */
+.badge {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+/* Green badge enhancement */
+.badge.bg-success {
+  background: linear-gradient(135deg, #28a745, #5cd67c);
+}
+
+/* Red badge enhancement */
+.badge.bg-danger {
+  background: linear-gradient(135deg, #dc3545, #ff6b6b);
+}
+
+/* Button */
+.btn-primary {
+  border-radius: 8px;
+  font-weight: 500;
+  padding: 6px 14px;
+  transition: all 0.2s ease;
+}
+
+/* Button hover */
+.btn-primary:hover:not(:disabled) {
+  transform: scale(1.05);
+}
+
+/* Disabled button */
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Empty state row */
+.text-muted {
+  font-size: 14px;
+  padding: 20px;
+}
+
+/* Smooth entry */
+.card,
+.table {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive tweak */
+@media (max-width: 768px) {
+  .table td,
+  .table th {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .btn {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+}
