@@ -13,6 +13,12 @@
     <ul class="navbar-nav ms-auto">
 
       <li class="nav-item" *ngIf="bookingService.token">
+        <a class="nav-link btn btn-link" routerLink="/my-bookings" routerLinkActive="active">
+          View Bookings
+          </a>
+      </li>
+
+      <li class="nav-item" *ngIf="bookingService.token">
         <a class="nav-link btn btn-link" (click)="logout()" routerLinkActive="active">
           Logout
         </a>

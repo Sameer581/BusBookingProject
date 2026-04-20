@@ -1,0 +1,52 @@
+<div class="container mt-4">
+
+  <h3 class="mb-3">My Bookings</h3>
+
+  <!-- If bookings exist -->
+  <div *ngIf="bookings && bookings.length > 0; else noBookings">
+
+    <table class="table table-bordered table-striped text-center">
+      <thead class="table-dark">
+        <tr>
+          <th>Booking ID</th>
+          <th>Bus Name</th>
+          <th>Source</th>
+          <th>Destination</th>
+          <th>Date</th>
+          <th>Seats</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let b of bookings">
+          <td>{{ b.bookingId }}</td>
+          <td>{{ b.busName }}</td>
+          <td>{{ b.source }}</td>
+          <td>{{ b.destination }}</td>
+          <td>{{ b.travelDate }}</td>
+          <td>
+            <!-- Handles both array and string -->
+            <span *ngIf="b.seats instanceof Array; else seatString">
+              <span class="badge bg-primary me-1" *ngFor="let s of b.seats">
+                {{ s }}
+              </span>
+            </span>
+
+            <ng-template #seatString>
+              {{ b.seats }}
+            </ng-template>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <!-- If no bookings -->
+  <ng-template #noBookings>
+    <div class="alert alert-info text-center">
+      No bookings found.
+    </div>
+  </ng-template>
+
+</div>

@@ -33,4 +33,8 @@ export class BookingService {
   bookSeats(payload: any): Observable<any> {
     return this.http.post('http://localhost:8080/booking/book', payload);
   }
+
+  getBookingsByCustomerId(custId: number): Observable<any>{
+    return this.http.get('http://localhost:8080/booking/customer/' + custId);
+  }
 }
