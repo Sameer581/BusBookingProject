@@ -1,7 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm px-4" *ngIf="bookingService.token">
+<nav class="navbar navbar-expand-lg custom-navbar px-4" *ngIf="bookingService.token">
 
-  <a class="navbar-brand fw-bold" href="#">
-    Bus Booking
+  <a class="navbar-brand fw-bold brand-logo" routerLink="/">
+    🚌 BusBooking
   </a>
 
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -10,24 +10,18 @@
 
   <div class="collapse navbar-collapse" id="navbarNav">
 
-    <ul class="navbar-nav ms-auto">
+    <ul class="navbar-nav ms-auto align-items-center">
 
-      <li class="nav-item">
-        <a class="nav-link btn btn-link" routerLink="/signup" routerLinkActive="active">
-          Sign Up
+      <li class="nav-item me-2" *ngIf="bookingService.token">
+        <a class="nav-link nav-pill" routerLink="/my-bookings" routerLinkActive="active">
+          📋 My Bookings
         </a>
       </li>
 
       <li class="nav-item" *ngIf="bookingService.token">
-        <a class="nav-link btn btn-link" routerLink="/my-bookings" routerLinkActive="active">
-          View Bookings
-          </a>
-      </li>
-
-      <li class="nav-item" *ngIf="bookingService.token">
-        <a class="nav-link btn btn-link" (click)="logout()" routerLinkActive="active">
+        <button class="btn logout-btn" (click)="logout()">
           Logout
-        </a>
+        </button>
       </li>
 
     </ul>

@@ -41,4 +41,8 @@ export class BookingService {
   getBookingsByCustomerId(custId: number): Observable<any>{
     return this.http.get('http://localhost:8080/booking/customer/' + custId);
   }
+
+  getPassengersByBookingId(id: number) {
+    return this.http.get<any[]>(`http://localhost:8080/booking/bookings/${id}/passengers`);
+  }
 }

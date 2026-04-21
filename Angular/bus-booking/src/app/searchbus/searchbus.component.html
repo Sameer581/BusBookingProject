@@ -1,85 +1,74 @@
-<div class="container mt-4">
-  <h3>Search Buses</h3>
+<div class="search-wrapper d-flex justify-content-center align-items-center">
 
-  <form #searchForm="ngForm" (ngSubmit)="searchBuses()" novalidate>
+  <div class="search-card p-4">
 
-    <!-- SOURCE -->
-    <input
-      type="text"
-      name="source"
-      [(ngModel)]="source"
-      #sourceInput="ngModel"
-      placeholder="Source"
-      class="form-control mb-1"
-      required
-      minlength="3"
-      pattern=".*\S.*"
-    />
+    <h3 class="text-center mb-4">🚌 Find Your Bus</h3>
 
-    <div *ngIf="sourceInput.touched && sourceInput.errors">
-      <small class="text-danger" *ngIf="sourceInput.errors?.['required']">
-        Source is required.
-      </small>
-      <small class="text-danger" *ngIf="sourceInput.errors?.['minlength']">
-        Minimum 3 characters required.
-      </small>
-      <small class="text-danger" *ngIf="sourceInput.errors?.['pattern']">
-        Cannot be empty spaces.
-      </small>
-    </div>
+    <form #searchForm="ngForm" (ngSubmit)="searchBuses()" novalidate>
 
-    <input
-      type="text"
-      name="destination"
-      [(ngModel)]="destination"
-      #destinationInput="ngModel"
-      placeholder="Destination"
-      class="form-control mb-1 mt-2"
-      required
-      minlength="3"
-      pattern=".*\S.*"
-    />
+      <!-- Source -->
+      <div class="mb-3">
+        <label>From</label>
+        <input type="text"
+          name="source"
+          [(ngModel)]="source"
+          #sourceInput="ngModel"
+          class="form-control custom-input"
+          placeholder="Enter source city"
+          required minlength="3" pattern=".*\S.*" />
 
-    <div *ngIf="destinationInput.touched && destinationInput.errors">
-      <small class="text-danger" *ngIf="destinationInput.errors?.['required']">
-        Destination is required.
-      </small>
-      <small class="text-danger" *ngIf="destinationInput.errors?.['minlength']">
-        Minimum 3 characters required.
-      </small>
-      <small class="text-danger" *ngIf="destinationInput.errors?.['pattern']">
-        Cannot be empty spaces.
-      </small>
-    </div>
+        <small class="text-danger" *ngIf="sourceInput.touched && sourceInput.invalid">
+          Enter valid source (min 3 chars)
+        </small>
+      </div>
 
-    <div *ngIf="source && destination && source === destination">
-      <small class="text-danger">
-        Source and Destination cannot be the same.
-      </small>
-    </div>
+      <!-- Destination -->
+      <div class="mb-3">
+        <label>To</label>
+        <input type="text"
+          name="destination"
+          [(ngModel)]="destination"
+          #destinationInput="ngModel"
+          class="form-control custom-input"
+          placeholder="Enter destination city"
+          required minlength="3" pattern=".*\S.*" />
 
-    <input
-      type="date"
-      name="date"
-      [(ngModel)]="date"
-      #dateInput="ngModel"
-      class="form-control mb-1 mt-2"
-      required
-      />
+        <small class="text-danger" *ngIf="destinationInput.touched && destinationInput.invalid">
+          Enter valid destination
+        </small>
+      </div>
 
-    <div *ngIf="dateInput.touched && dateInput.errors">
-      <small class="text-danger" *ngIf="dateInput.errors?.['required']">
-        Date is required.
-      </small>
-    </div>
+      <!-- Same city error -->
+      <div *ngIf="source && destination && source === destination">
+        <small class="text-danger">
+          Source and Destination cannot be the same
+        </small>
+      </div>
 
-    <button
-      class="btn btn-primary mt-3"
-      type="submit"
-      [disabled]="searchForm.invalid || source === destination"
-    >
-      Get Schedule
-    </button>
+      <!-- Date -->
+      <div class="mb-3 mt-2">
+        <label>Travel Date</label>
+        <input type="date"
+          name="date"
+          [(ngModel)]="date"
+          #dateInput="ngModel"
+          class="form-control custom-input"
+          required />
 
-  </form>
+        <small class="text-danger" *ngIf="dateInput.touched && dateInput.invalid">
+          Please select a date
+        </small>
+      </div>
+
+      <!-- Button -->
+      <button class="btn search-btn w-100 mt-3"
+        type="submit"
+        [disabled]="searchForm.invalid || source === destination">
+        🔍 Search Buses
+      </button>
+
+    </form>
+
+  </div>
+
 </div>

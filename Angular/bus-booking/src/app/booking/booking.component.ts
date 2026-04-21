@@ -90,7 +90,13 @@ export class BookingComponent implements OnInit {
     });
   }
 
-  clearSeats() {}
+  clearSeats() {
+    this.seats.forEach(row => {
+    row.forEach(seat => seat.isSelected = false);
+    });
+    this.passengers = [];
+
+  }
 
   toggleSeat(seat: any) {
     if (seat.isBooked) return;
@@ -110,5 +116,8 @@ export class BookingComponent implements OnInit {
     }
   }
 
-  resetBooking() {}
+  resetBooking() {
+    this.initializeSeats();
+    this.passengers = [];
+  }
 }

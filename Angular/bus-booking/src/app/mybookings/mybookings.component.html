@@ -1,35 +1,52 @@
-<div class="container mt-4">
+<table class="table table-bordered text-center">
 
-  <h3 class="mb-3">My Bookings</h3>
+  <thead class="table-dark">
+    <tr>
+      <th>Booking ID</th>
+      <th>Date</th>
+      <th>Action</th>
+    </tr>
+  </thead>
 
-  <!-- If bookings exist -->
-  <div *ngIf="bookings && bookings.length > 0; else noBookings">
+  <tbody>
 
-    <table class="table table-bordered table-striped text-center">
-      <thead class="table-dark">
-        <tr>
-          <th>Booking ID</th>
-          <th>Bus Schedule ID</th>
-          <th>Date</th>
-        </tr>
-      </thead>
+    <ng-container *ngFor="let b of bookings">
 
-      <tbody>
-        <tr *ngFor="let b of bookings">
-          <td>{{ b.bookingId }}</td>
-          <td>{{ b.scheduleId }}</td>
-          <td>{{ b.bookingDt | date: 'dd-MMM-yyyy' }}</td>
-        </tr>
-      </tbody>
-    </table>
+      <!-- Main Row -->
+      <tr>
+        <td>{{ b.bookingId }}</td>
+        <td>{{ b.bookingDt | date:'dd-MMM-yyyy' }}</td>
 
-  </div>
+        <td>
+          <button class="btn btn-sm btn-primary"
+            (click)="togglePassengers(b)">
+            {{ selectedBookingId === b.bookingId ? 'Hide' : 'View' }}
+          </button>
+        </td>
+      </tr>
 
-  <!-- If no bookings -->
-  <ng-template #noBookings>
-    <div class="alert alert-info text-center">
-      No bookings found.
-    </div>
-  </ng-template>
+      <!-- Expand Row -->
+      <tr *ngIf="selectedBookingId === b.bookingId">
+        <td colspan="3">
 
-</div>
+          <div class="passenger-box p-3 text-start">
+
+            <h6>👤 Passengers</h6>
+
+            <ul class="list-group">
+              <li class="list-group-item" *ngFor="let p of passengers">
+              🪑 {{ p.seatNo }} | {{ p.passengerName }} (Age: {{ p.passengerAge }})
+            </li>
+            
+            </ul>
+
+          </div>
+
+        </td>
+      </tr>
+
+    </ng-container>
+
+  </tbody>
+
+</table>

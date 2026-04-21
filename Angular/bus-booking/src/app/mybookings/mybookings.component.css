@@ -1,95 +1,73 @@
-/* Container spacing */
-.container {
-  max-width: 800px;
-  margin: auto;
+/* Container */
+.booking-container {
+  background: linear-gradient(135deg, #141e30, #243b55);
+  padding: 20px;
+  border-radius: 12px;
+  color: #fff;
 }
 
-/* Heading */
-h3 {
-  font-weight: 600;
-  letter-spacing: 0.4px;
-}
-
-/* Table styling */
-.table {
-  border-radius: 10px;
-  overflow: hidden;
+/* Table card */
+.table-card {
   background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
 }
 
-/* Header */
-.table thead {
-  font-size: 14px;
-  letter-spacing: 0.5px;
+/* Table */
+.custom-table thead {
+  background: #0072ff;
+  color: #fff;
 }
 
-/* Table rows */
-.table tbody tr {
-  transition: background 0.2s ease, transform 0.1s ease;
+.custom-table tbody tr {
+  transition: 0.3s;
 }
 
-/* Hover effect */
-.table tbody tr:hover {
-  background-color: #f5f7ff;
-  transform: scale(1.01);
+.custom-table tbody tr:hover {
+  background: #f5f7fa;
 }
 
-/* Cells */
-.table td,
-.table th {
-  vertical-align: middle;
-  padding: 12px;
-  font-size: 14px;
+/* Booking ID badge */
+.booking-id {
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 12px;
 }
 
-/* Zebra override (softer than default bootstrap) */
-.table-striped tbody tr:nth-of-type(odd) {
-  background-color: #fafbff;
-}
-
-/* Booking ID emphasis */
-.table td:first-child {
+/* View link */
+.view-link {
+  cursor: pointer;
+  color: #0072ff;
   font-weight: 600;
-  color: #333;
+  text-decoration: none;
 }
 
-/* Alert styling */
-.alert {
+.view-link:hover {
+  text-decoration: underline;
+}
+
+/* Empty state */
+.empty-state {
+  background: rgba(255,255,255,0.1);
+  border-radius: 12px;
+}
+
+/* Button */
+.explore-btn {
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  border: none;
+  color: #fff;
+  border-radius: 20px;
+  padding: 8px 18px;
+}
+
+.passenger-box {
+  background: #f8f9fa;
+  border-radius: 10px;
+}
+
+.list-group-item {
   border-radius: 8px;
-  font-size: 14px;
-  padding: 10px;
-}
-
-/* Empty state styling */
-.alert-info {
-  background-color: #eef4ff;
-  border-color: #cfe0ff;
-  color: #3a5ccc;
-}
-
-/* Smooth appearance */
-.table,
-.alert {
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-/* Animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(5px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Responsive tweak */
-@media (max-width: 600px) {
-  .table th,
-  .table td {
-    font-size: 12px;
-    padding: 8px;
-  }
+  margin-bottom: 5px;
 }
