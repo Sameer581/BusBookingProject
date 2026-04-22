@@ -70,7 +70,7 @@ public class BusBookingServiceImple implements BusBookingService {
 			passenger.setPassengerAge(p.passengerAge());
 			passenger.setPassengerName(p.passengerName());
 			passenger.setSeatNo(p.seatNo().toUpperCase());
-			schedule.getBookedSeats().add(p.seatNo());
+			schedule.getBookedSeats().add(p.seatNo().toUpperCase());
 			passenger.setBooking(booking);
 
 			return passenger;
@@ -80,7 +80,6 @@ public class BusBookingServiceImple implements BusBookingService {
 		booking.setPassengers(passengers);
 		schedule.setAvailableSeats(schedule.getAvailableSeats() - passengers.size());
 
-		bookingRepo.save(booking);
 		scheduleRepo.save(schedule);
 
 		return BookingToDto.mapToDto(bookingRepo.save(booking));
