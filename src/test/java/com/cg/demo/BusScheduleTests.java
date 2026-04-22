@@ -20,7 +20,8 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.cg.dto.RouteScheduleDto;
 import com.cg.service.BusBookingService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
+import tools.jackson.databind.ObjectMapper;
 
 @SpringBootTest
 @AutoConfigureMockMvc
