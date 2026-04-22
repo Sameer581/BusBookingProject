@@ -38,6 +38,7 @@ class BusBookingTest {
 
     @Test
     void bookTicket_success() throws Exception {
+
         BusBookingDto input = new BusBookingDto(
                 null, 10L, 1L, LocalDate.now(), null
         );
@@ -51,13 +52,16 @@ class BusBookingTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(input)))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.bookingId").value(101));
+                .andExpect(jsonPath("$.bookingId").value(101))
+                .andExpect(jsonPath("$.scheduleId").value(10))
+                .andExpect(jsonPath("$.custId").value(1));
     }
 
     @Test
-    void bookTicket_validationFailure() throws Exception {
+    void bookTicket_validationFailure_nullScheduleAndCust() throws Exception {
+
         BusBookingDto invalid = new BusBookingDto(
-                null, null, null, LocalDate.now(), null
+                null, null, null, LocalDate.now(), null  // ❌ scheduleId & custId @NotNull
         );
 
         mockMvc.perform(post("/booking/book")
@@ -70,7 +74,46 @@ class BusBookingTest {
     }
 
     @Test
+    void bookTicket_validationFailure_pastDate() throws Exception {
+
+        BusBookingDto invalid = new BusBookingDto(
+                null, 10L, 1L, LocalDate.now().minusDays(1), null  // ❌ @FutureOrPresent
+        );
+
+        mockMvc.perform(post("/booking/book")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(invalid)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.errormsg").value("validation failed"))
+                .andExpect(jsonPath("$.errMap.bookingDt").exists());
+    }
+
+    @Test
+    void bookTicket_futureDate_success() throws Exception {
+
+        BusBookingDto input = new BusBookingDto(
+                null, 10L, 1L, LocalDate.now().plusDays(5), null
+        );
+        BusBookingDto output = new BusBookingDto(
+                103L, 10L, 1L, LocalDate.now().plusDays(5), null
+        );
+
+        when(bookingService.createBooking(any())).thenReturn(output);
+
+        mockMvc.perform(post("/booking/book")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(input)))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.bookingId").value(103));
+    }
+
+    // ───────────────────────────────────────────
+    // GET /booking/customer/{id}
+    // ───────────────────────────────────────────
+
+    @Test
     void getBookingsByCustomer_success() throws Exception {
+
         BusBookingDto dto = new BusBookingDto(
                 1L, 10L, 1L, LocalDate.now(), null
         );
@@ -80,6 +123,33 @@ class BusBookingTest {
         mockMvc.perform(get("/booking/customer/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.size()").value(1))
-                .andExpect(jsonPath("$[0].bookingId").value(1));
+                .andExpect(jsonPath("$[0].bookingId").value(1))
+                .andExpect(jsonPath("$[0].scheduleId").value(10))
+                .andExpect(jsonPath("$[0].custId").value(1));
+    }
+
+    @Test
+    void getBookingsByCustomer_emptyList() throws Exception {
+
+        when(bookingService.getBookingsByCustomer(99L)).thenReturn(List.of());
+
+        mockMvc.perform(get("/booking/customer/99"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.size()").value(0));
+    }
+
+    @Test
+    void getBookingsByCustomer_multipleBookings() throws Exception {
+
+        BusBookingDto dto1 = new BusBookingDto(1L, 10L, 2L, LocalDate.now(), null);
+        BusBookingDto dto2 = new BusBookingDto(2L, 20L, 2L, LocalDate.now().plusDays(1), null);
+
+        when(bookingService.getBookingsByCustomer(2L)).thenReturn(List.of(dto1, dto2));
+
+        mockMvc.perform(get("/booking/customer/2"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.size()").value(2))
+                .andExpect(jsonPath("$[0].bookingId").value(1))
+                .andExpect(jsonPath("$[1].bookingId").value(2));
     }
 }
