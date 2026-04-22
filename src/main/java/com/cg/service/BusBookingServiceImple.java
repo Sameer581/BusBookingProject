@@ -49,8 +49,6 @@ public class BusBookingServiceImple implements BusBookingService {
 		schedule.setTotalSeats(dto.totalSeats());
 		schedule.setScheduleStatus("SCHEDULED");
 
-		scheduleRepo.save(schedule);
-
 		return ScheduleToDto.mapToDto(scheduleRepo.save(schedule));
 	}
 
@@ -80,7 +78,7 @@ public class BusBookingServiceImple implements BusBookingService {
 		}).toList() : List.of();
 
 		booking.setPassengers(passengers);
-		schedule.setAvailableSeats(schedule.getAvailableSeats()-passengers.size());
+		schedule.setAvailableSeats(schedule.getAvailableSeats() - passengers.size());
 
 		bookingRepo.save(booking);
 		scheduleRepo.save(schedule);
